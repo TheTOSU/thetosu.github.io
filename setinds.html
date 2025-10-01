@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saglyk Türkmenistan - Medeniýet portaly</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        :root {
+            --primary: #008753;
+            --secondary: #ffffff;
+            --accent: #e4002b;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --text: #333333;
+            --bg: #ffffff;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e0e0e0;
+        }
+
+        .darkmode{
+            --primary: #4CAF50;
+            --secondary: #2d2d2d;
+            --accent: #ff5252;
+            --light: #1a1a1a;
+            --dark: #f5f5f5;
+            --success: #66bb6a;
+            --warning: #ffb74d;
+            --info: #4fc3f7;
+            --text: #f5f5f5;
+            --bg: #121212;
+            --card-bg: #2d2d2d;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border: #444444;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        /* Welcome Modal Styles */
+        .welcome-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .welcome-content {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        @keyframes modalAppear {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .welcome-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-content h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .welcome-content p {
+            margin-bottom: 2rem;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        
+        .welcome-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .welcome-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+        
+        .welcome-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .welcome-btn-primary:hover {
+            background: #006441;
+            transform: translateY(-2px);
+        }
+        
+        .welcome-btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .welcome-btn-secondary:hover {
+            background: rgba(0, 135, 83, 0.1);
+        }
+        
+        /* Registration Form Styles */
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-input-group {
+            position: relative;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 135, 83, 0.1);
+        }
+        
+        .form-label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--card-bg);
+            padding: 0 5px;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            width: 0%;
+        }
+        
+        .strength-0 { width: 0%; background-color: var(--accent); }
+        .strength-1 { width: 20%; background-color: var(--accent); }
+        .strength-2 { width: 40%; background-color: var(--warning); }
+        .strength-3 { width: 60%; background-color: var(--warning); }
+        .strength-4 { width: 80%; background-color: var(--primary); }
+        .strength-5 { width: 100%; background-color: var(--success); }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #006441);
+            color: var(--secondary);
+            padding: 1rem;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            width: 60px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            transition: all 0.3s ease;
+            left: 3px;
+        }
+        
+        .darkmode .theme-toggle::before {
+            left: calc(100% - 27px);
+            background: #FFD700;
+        }
+        
+        .theme-icon {
+            font-size: 14px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .sun-icon {
+            color: #FFD700;
+            margin-right: auto;
+        }
+        
+        .moon-icon {
+            color: #f5f5f5;
+            margin-left: auto;
+        }
+
+        .sidebar{
+            position: fixed;
+            top: 0;
+            right: -300px;
+            height: 100vh;
+            width: 280px;
+            z-index: 999;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: -10px 0 10px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 20px;
+            transition: right 0.3s ease;
+        }
+        
+        .sidebar.active {
+            right: 0;
+        }
+        
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .sidebar-close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            width: 100%;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(0, 135, 83, 0.1);
+            color: var(--primary);
+        }
+        
+        .user-profile-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 10px;
+            margin-top: auto;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .user-profile-sidebar:hover {
+            background: rgba(0, 135, 83, 0.1);
+        }
+        
+        .user-avatar-sidebar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .user-info-sidebar {
+            flex: 1;
+        }
+        
+        .user-info-sidebar div:first-child {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+        
+        .user-info-sidebar div:last-child {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .user-profile:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .burger-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .register-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 135, 83, 0.8), rgba(0, 100, 65, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23008753" opacity="0.1"/><path d="M0 0L100 100" stroke="%23008753" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23008753" stroke-width="2" opacity="0.2"/></svg>');
+            background-size: cover;
+            padding: 4rem 1rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--secondary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c10024;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #006441;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        
+        .features {
+            margin: 3rem auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .services {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 3rem 1rem;
+        }
+        
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .service-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .service-item h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .queue-system {
+            margin: 3rem auto;
+        }
+        
+        .queue-form {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .ai-assistant {
+            background-color: var(--light);
+            padding: 3rem 1rem;
+            margin: 3rem auto;
+        }
+        
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 10px;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+        
+        .ai-message {
+            background: var(--light);
+            align-self: flex-start;
+            color: var(--text);
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .chat-input button {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .first-aid-section {
+            margin: 3rem auto;
+        }
+        
+        .first-aid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .first-aid-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .first-aid-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .first-aid-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .first-aid-card ul {
+            padding-left: 1.5rem;
+        }
+        
+        .first-aid-card li {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .pharmacy-section {
+            margin: 3rem auto;
+        }
+        
+        .pharmacy-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .pharmacy-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .pharmacy-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .pharmacy-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pharmacy-card p {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .pharmacy-card .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .status.open {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status.closed {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            color: var(--text);
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .queue-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--secondary);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .burger-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .map-controls {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .welcome-buttons {
+                flex-direction: column;
+            }
+            
+            .welcome-btn {
+                width: 100%;
+            }
+        }   
+    </style>
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div class="welcome-modal" id="welcome-modal">
+        <div class="welcome-content">
+            <div class="welcome-icon">⚕</div>
+            <h2>Saglyk Türkmenistana hoş geldiňiz!</h2>
+            <p>Türkmenistanyň saglyk ulgamyna resmi web sahypasy. Hasap döretmek ýa-da öňem döredilen hasaba girmek üçin aşakdaky opsiýalary ulanyň.</p>
+            
+            <div class="registration-form" id="login-form">
+                <div class="form-input-group">
+                    <input type="email" id="login-email" class="form-input" placeholder=" " required>
+                    <label for="login-email" class="form-label">E-mail adresiňiz</label>
+                </div>
+                
+                <div class="form-input-group">
+                    <input type="password" id="login-password" class="form-input" placeholder=" " required>
+                    <label for="login-password" class="form-label">Açarsöziňiz</label>
+                </div>
+                
+                <div class="welcome-buttons">
+                    <button class="welcome-btn welcome-btn-primary" id="login-btn">Hasaba girmek</button>
+                    <button class="welcome-btn welcome-btn-secondary" id="show-register">Täze hasap döretmek</button>
+                </div>
+            </div>
+            
+            <div class="registration-form" id="register-form" style="display: none;">
+                <div class="form-input-group">
+                    <input type="text" id="reg-name" class="form-input" placeholder=" " required>
+                    <label for="reg-name" class="form-label">Adyňyz we familiýaňyz</label>
+                </div>
+                
+                <div class="form-input-group">
+                    <input type="email" id="reg-email" class="form-input" placeholder=" " required>
+                    <label for="reg-email" class="form-label">E-mail adresiňiz</label>
+                </div>
+                
+                <div class="form-input-group">
+                    <input type="tel" id="reg-phone" class="form-input" placeholder=" " required>
+                    <label for="reg-phone" class="form-label">Telefon belgiňiz</label>
+                </div>
+                
+                <div class="form-input-group">
+                    <input type="password" id="reg-password" class="form-input" placeholder=" " required>
+                    <label for="reg-password" class="form-label">Açarsöziňiz</label>
+                    <div class="password-strength" id="reg-password-strength"></div>
+                </div>
+                
+                <div class="welcome-buttons">
+                    <button class="welcome-btn welcome-btn-primary" id="register-btn">Hasap döretmek</button>
+                    <button class="welcome-btn welcome-btn-secondary" id="show-login">Hasaba girmek</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">⚕</div>
+                <div class="logo-text">Saglyk Türkmenistan</div>
+            </div>
+            
+            
+            
+            
+            <nav>
+                <ul id="nav-menu">
+                    <li class="theme-toggle-container">
+                        <button class="theme-toggle" id="theme-toggle">
+                            <i class="fas fa-sun theme-icon sun-icon"></i>
+                            <i class="fas fa-moon theme-icon moon-icon"></i>
+                        </button>
+                    </li>
+                    
+                    <li class="user-profile" id="user-profile" onclick="goToSettings()">
+                        <div class="user-avatar" id="user-avatar">?</div>
+                        <div id="user-info">
+                            <div style="font-weight: 500;" id="user-name">Hasap dörediň</div>
+                            <div style="font-size: 0.8rem;" id="user-email">Registrasiýa ediň</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="burger-menu" id="burger-menu">
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="sidebar-close" id="sidebar-close">&times;</button>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
+            <li><a href="#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
+            <li><a href="nobat.html"><i class="fas fa-calendar-alt"></i> Nöbet</a></li>
+            <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkin kömek</a></li>
+            <li><a href="dermanhana.html"><i class="fas fa-pills"></i> Aptekalar</a></li>
+            <li><a href="AI maslahat.html"><i class="fas fa-robot"></i> AI Maslahat</a></li>
+            <li><a href="#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
+        </ul>
+        
+        <div class="user-profile-sidebar" onclick="goToSettings()">
+            <div class="user-avatar-sidebar" id="sidebar-user-avatar">?</div>
+            <div class="user-info-sidebar">
+                <div id="sidebar-user-name">Hasap dörediň</div>
+                <div id="sidebar-user-email">Registrasiýa ediň</div>
+            </div>
+        </div>
+    </aside>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Türkmenistanyň saglyk ulgamyna hoş geldiňiz!</h1>
+            <p>Biz siziň we maşgalanyzyň saglygyny üpjün etmek üçin bu ýerde. Onlaýn nöbet alyň, lukmanlara ýüz tutuň we AI maslahatçy bilen saglyk meseleleriňizi çözüň.</p>
+            <a href="nobat.html" class="btn">Nöbet almak</a>
+            <a href="AI maslahat.html" class="btn btn-outline">AI Maslahat</a>
+        </div>
+    </section>
+
+    <section class="features container">
+        <h2 class="section-title">Biziň hyzmatlarymyz</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Onlaýn nöbet</h3>
+                <p>Klinikada garaşmazlyk üçin onlaýn nöbet alyň we öz wagtyňyza görä lukmana geliň.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💊</div>
+                <h3>Derman maslahaty</h3>
+                <p>AI maslahatçymyz siziň keselliňize laýyk dermanlary saýlamaga kömek eder.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍⚕️</div>
+                <h3>Telemedisina</h3>
+                <p>Wideo görüşmeler arkaly lukman bilen maslahatlaşyň. Bu aýratynlyk uzak õerlerde ýaşaýan adamlar üçin ähmiyetlidir.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Biziň lukmanlarymyz</h2>
+            <div class="service-list">
+                <div class="service-item">
+                    <h3>Çagalar lukmany</h3>
+                    <p>Çagalaryň kesellerini bejermek we aladalaryny aradan aýyrmak üçin işleýän hünärli lukmanlar.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Ginekolog</h3>
+                    <p>Aýal keselleri boýunça hünärli lukmanlar. Maşgala meýilnamasy we aýal saglygy boýunça maslahatlar.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Kardiolog</h3>
+                    <p>Ýürek we gan damarlary keselleri boýunça hünärli lukmanlar. Diagnostika we bejergi.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Stomatolog</h3>
+                    <p>Diş we agyz boşlugy keselleri boýunça hünärli lukmanlar. Dişleri bejermek we aýlaw etmek.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="queue-system container" id="queue">
+        <h2 class="section-title">Onlaýn nöbet alyň</h2>
+        <div class="queue-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="patient-name">Adyňyz we familiýaňyz:</label>
+                    <input type="text" id="patient-name" placeholder="Adyňyz we familiýaňyz">
+                </div>
+                <div class="form-group">
+                    <label for="patient-phone">Telefon belgiňiz:</label>
+                    <input type="tel" id="patient-phone" placeholder="+993">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="doctor-specialty">Lukmanyň hünäri:</label>
+                    <select id="doctor-specialty">
+                        <option value="">Saýlaň</option>
+                        <option value="pediatrician">Çagalar lukmany</option>
+                        <option value="gynecologist">Ginekolog</option>
+                        <option value="cardiologist">Kardiolog</option>
+                        <option value="dentist">Stomatolog</option>
+                        <option value="therapist">Terapewt</option>
+                        <option value="surgeon">Hirurg</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointment-date">Geljek wagty:</label>
+                    <input type="date" id="appointment-date">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="symptoms">Alamatyňyz (mümkin bolsa):</label>
+                <textarea id="symptoms" rows="3" placeholder="Alamatyňyzy ýazyň..."></textarea>
+            </div>
+            
+            <button class="btn btn-secondary" id="submit-queue">Nöbeti tassyklamak</button>
+        </div>
+    </section>
+
+    <section class="ai-assistant" id="ai-assistant">
+        <div class="container">
+            <h2 class="section-title">AI Maslahatçy</h2>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3>Saglyk boýunça AI maslahatçy</h3>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message ai-message">
+                        Salam! Men siziň saglygyňyz boýunça maslahat berip bilerin. Size nädogry? Alamatyňyzy we soraglaryňyzy ýazyň.
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Meniň soragym...">
+                    <button class="btn" id="send-btn">Ugratmak</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="first-aid-section container" id="first-aid">
+        <h2 class="section-title">Ilkin saglyk kömegi</h2>
+        <div class="first-aid-grid">
+            <div class="first-aid-card">
+                <h3><i class="fas fa-heartbeat"></i> Ýürek öçürmesi</h3>
+                <ul>
+                    <li>Adam ýatyryň we boýnunyň we göwreniň gysylmagyny barlaň</li>
+                    <li>112-ä jaň ediň</li>
+                    <li>Göksi ortasyna eliňizi goýuň we beýleki eliňizi birinjiniň üstüne goýuň</li>
+                    <li>Her 100 gezek basgyçdan soň 2 sapak beriň</li>
+                </ul>
+            </div>
+            <div class="first-aid-card">
+                <h3><i class="fas fa-burn"></i> Ýangyn</h3>
+                <ul>
+                    <li>Yangynyň ýerini sowuk suw bilen sowudyň</li>
+                    <li>Yangyn ýerine heç zat çalmaň</li>
+                    <li>Gaty yangyn bolsa, lukmana ýüz tutuň</li>
+                    <li>Yangyn ýerini arassa bez ýa-da bandaj bilen örtüň</li>
+                </ul>
+            </div>
+            <div class="first-aid-card">
+                <h3><i class="fas fa-cut"></i> Kesikler</h3>
+                <ul>
+                    <li>Kesigi arassa suw bilen ýuwuň</li>
+                    <li>Kesigiň üstüne basyp, ganyň akmasyny bes ediň</li>
+                    <li>Antiseptik ulanyň we bandaj bilen örtüň</li>
+                    <li>Ganyň akmasy bes bolmasa, lukmana ýüz tutuň</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="pharmacy-section container" id="pharmacy">
+        <h2 class="section-title">Aşgabatdaky aptekalar</h2>
+        <div class="pharmacy-controls">
+            <input type="text" id="pharmacy-search" placeholder="Aptekany gözlemek..." class="form-input">
+            <select id="pharmacy-filter" class="form-input">
+                <option value="all">Hemmesi</option>
+                <option value="open">Açyk</option>
+                <option value="24h">24 sagat işleýän</option>
+            </select>
+        </div>
+        <div class="pharmacy-list" id="pharmacy-list">
+            <!-- Pharmacies will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Queue Success Modal -->
+    <div class="modal" id="queue-modal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h3>Nöbetiňiz kabul edildi!</h3>
+            <p>Nöbet belgiňiz:</p>
+            <div class="queue-number" id="queue-number">A-156</div>
+            <p>Geljek wagty: <span id="appointment-time"></span></p>
+            <button class="btn" id="close-modal">Bolýar</button>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Saglyk Türkmenistan</h3>
+                <p>Türkmenistanyň saglyk ulgamynyň resmi web sahypasy. Biz siziň saglygyňyzy goramak üçin bu ýerde.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Biziň hyzmatlarymyz</h3>
+                <a href="#queue">Onlaýn nöbet</a>
+                <a href="#ai-assistant">AI Maslahatçy</a>
+                <a href="#pharmacy">Aptekalar</a>
+                <a href="#first-aid">Ilkin kömek</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Aragatnaşyk</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Aşgabat, Türkmenistan</p>
+                <p><i class="fas fa-phone"></i> +993 12 34 56 78</p>
+                <p><i class="fas fa-envelope"></i> info@saglyk.gov.tm</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Täzelikler</h3>
+                <p>Soňky saglyk täzelikleri we maslahatlary üçin biziň sosial ulgamlarymyza abuna boluň.</p>
+                <a href="#" class="btn btn-sm">Abuna bolmak</a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Saglyk Türkmenistan. Ähli hukuklary goralandyr.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Welcome Modal and Registration System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (isLoggedIn && currentUser) {
+                // User is logged in, hide modal and update UI
+                document.getElementById('welcome-modal').style.display = 'none';
+                updateUserUI(currentUser);
+            } else {
+                // Show welcome modal
+                document.getElementById('welcome-modal').style.display = 'flex';
+            }
+            
+            // Registration/Login form toggle
+            document.getElementById('show-register').addEventListener('click', function() {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('register-form').style.display = 'flex';
+            });
+            
+            document.getElementById('show-login').addEventListener('click', function() {
+                document.getElementById('register-form').style.display = 'none';
+                document.getElementById('login-form').style.display = 'flex';
+            });
+            
+            // Password strength indicator
+            document.getElementById('reg-password').addEventListener('input', function() {
+                const password = this.value;
+                const strengthBar = document.getElementById('reg-password-strength');
+                let strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                strengthBar.className = 'password-strength strength-' + strength;
+            });
+            
+            // Login functionality
+            document.getElementById('login-btn').addEventListener('click', function() {
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Simple validation
+                if (!email || !password) {
+                    alert('Email we açarsöz hökmany!');
+                    return;
+                }
+                
+                // Check if user exists
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Login successful
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    document.getElementById('welcome-modal').style.display = 'none';
+                    updateUserUI(user);
+                    alert('Hoş geldiňiz, ' + user.name + '!');
+                } else {
+                    alert('Email ýa-da açarsöz nädogry!');
+                }
+            });
+            
+            // Registration functionality
+            document.getElementById('register-btn').addEventListener('click', function() {
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const phone = document.getElementById('reg-phone').value;
+                const password = document.getElementById('reg-password').value;
+                
+                // Simple validation
+                if (!name || !email || !phone || !password) {
+                    alert('Ähli meýdanlar hökmany!');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    alert('Açarsöz azyndan 8 nyşandan ybarat bolmaly!');
+                    return;
+                }
+                
+                // Check if user already exists
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                if (users.find(u => u.email === email)) {
+                    alert('Bu email eýýäm ulanylýar!');
+                    return;
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    registrationDate: new Date().toLocaleDateString('tk-TM')
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify(newUser));
+                
+                document.getElementById('welcome-modal').style.display = 'none';
+                updateUserUI(newUser);
+                alert('Hasabyňyz üstünlikli döredildi!');
+            });
+            
+            // Update UI with user info
+            function updateUserUI(user) {
+                document.getElementById('user-name').textContent = user.name;
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-avatar').textContent = user.name.charAt(0).toUpperCase();
+                
+                document.getElementById('sidebar-user-name').textContent = user.name;
+                document.getElementById('sidebar-user-email').textContent = user.email;
+                document.getElementById('sidebar-user-avatar').textContent = user.name.charAt(0).toUpperCase();
+                
+                // Pre-fill queue form with user data
+                document.getElementById('patient-name').value = user.name;
+                document.getElementById('patient-phone').value = user.phone;
+            }
+            
+            // Queue submission
+            document.getElementById('submit-queue').addEventListener('click', function() {
+                const patientName = document.getElementById('patient-name').value;
+                const patientPhone = document.getElementById('patient-phone').value;
+                const doctorSpecialty = document.getElementById('doctor-specialty').value;
+                const appointmentDate = document.getElementById('appointment-date').value;
+                
+                if (!patientName || !patientPhone || !doctorSpecialty || !appointmentDate) {
+                    alert('Nöbet üçin ähli maglumatlar hökmany!');
+                    return;
+                }
+                
+                // Generate random queue number
+                const queueNumber = 'A-' + Math.floor(100 + Math.random() * 900);
+                document.getElementById('queue-number').textContent = queueNumber;
+                document.getElementById('appointment-time').textContent = appointmentDate;
+                
+                // Show success modal
+                document.getElementById('queue-modal').style.display = 'flex';
+            });
+            
+            // Close modal
+            document.getElementById('close-modal').addEventListener('click', function() {
+                document.getElementById('queue-modal').style.display = 'none';
+            });
+            
+            // AI Chat functionality
+            document.getElementById('send-btn').addEventListener('click', sendMessage);
+            document.getElementById('user-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            function sendMessage() {
+                const userInput = document.getElementById('user-input').value.trim();
+                if (!userInput) return;
+                
+                // Add user message to chat
+                addMessage(userInput, 'user');
+                
+                // Clear input
+                document.getElementById('user-input').value = '';
+                
+                // Generate AI response
+                setTimeout(() => {
+                    const aiResponse = generateAIResponse(userInput);
+                    addMessage(aiResponse, 'ai');
+                }, 1000);
+            }
+            
+            function addMessage(text, sender) {
+                const chatMessages = document.getElementById('chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function generateAIResponse(userInput) {
+                const responses = [
+                    "Bu barada has giňişleýin maglumat berip bilersiňizmi?",
+                    "Size kömek etmek üçin şu ýerde. Lukmana ýüz tutmagy maslahat berýärin.",
+                    "Bu alamatlar üçin derman maslahaty bermek hukugym ýok. Lukmana ýüz tutuň.",
+                    "Saglygyňyz üçin alada etýän bolsaňyz, iň gowusy lukmana ýüz tutmakdyr.",
+                    "Bu kesel barada maglumatyňyz barmy?",
+                    "Size kömek edip bildigime bagyşlaň. Başga soragyňyz barmy?",
+                    "Bu alamatlar köp kesellerde duş gelip biler. Kesgitlemek üçin lukmana ýüz tutmagy maslahat berýärin.",
+                    "Saglyk meseleleri üçn hünärli lukmana ýüz tutmagyňyz möhümdir.",
+                    "Bu barada has giňişleýin aýdyp bilersiňizmi?",
+                    "Size kömek etmek üçin şu ýerde. Soragyňyzy has anyk aýdyň."
+                ];
+                
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+            
+            // Load pharmacies
+            function loadPharmacies() {
+                const pharmacies = [
+                    { name: "Saglyk Merkezi Aptekasy", address: "Aşgabat, Görogly köçesi 45", phone: "+993 12 34 56 78", hours: "08:00 - 22:00", status: "open", type: "24h" },
+                    { name: "Dermanlar Dünýäsi", address: "Aşgabat, Bitarap Türkmenistan şaýoly 123", phone: "+993 12 34 56 79", hours: "09:00 - 20:00", status: "open", type: "regular" },
+                    { name: "Saglyk Eýesi", address: "Aşgabat, 2032 köçesi 67", phone: "+993 12 34 56 80", hours: "24 sagat", status: "open", type: "24h" },
+                    { name: "Gözegçilik Aptekasy", address: "Aşgabat, Magtymguly köçesi 89", phone: "+993 12 34 56 81", hours: "08:00 - 18:00", status: "closed", type: "regular" },
+                    { name: "Bejergi Önümleri", address: "Aşgabat, A. Nyýazow şaýoly 101", phone: "+993 12 34 56 82", hours: "09:00 - 21:00", status: "open", type: "regular" },
+                    { name: "Dermanhana", address: "Aşgabat, Garaşsyzlyk köçesi 56", phone: "+993 12 34 56 83", hours: "24 sagat", status: "open", type: "24h" }
+                ];
+                
+                const pharmacyList = document.getElementById('pharmacy-list');
+                pharmacyList.innerHTML = '';
+                
+                pharmacies.forEach(pharmacy => {
+                    const pharmacyCard = document.createElement('div');
+                    pharmacyCard.className = 'pharmacy-card';
+                    pharmacyCard.innerHTML = `
+                        <h3>${pharmacy.name}</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> ${pharmacy.address}</p>
+                        <p><i class="fas fa-phone"></i> ${pharmacy.phone}</p>
+                        <p><i class="fas fa-clock"></i> ${pharmacy.hours}</p>
+                        <span class="status ${pharmacy.status}">${pharmacy.status === 'open' ? 'Açyk' : 'Ýapyk'}</span>
+                    `;
+                    pharmacyList.appendChild(pharmacyCard);
+                });
+            }
+            
+            // Filter pharmacies
+            document.getElementById('pharmacy-search').addEventListener('input', filterPharmacies);
+            document.getElementById('pharmacy-filter').addEventListener('change', filterPharmacies);
+            
+            function filterPharmacies() {
+                const searchTerm = document.getElementById('pharmacy-search').value.toLowerCase();
+                const filterValue = document.getElementById('pharmacy-filter').value;
+                
+                const pharmacyCards = document.querySelectorAll('.pharmacy-card');
+                
+                pharmacyCards.forEach(card => {
+                    const name = card.querySelector('h3').textContent.toLowerCase();
+                    const address = card.querySelector('p').textContent.toLowerCase();
+                    const status = card.querySelector('.status').textContent.toLowerCase();
+                    const hours = card.querySelectorAll('p')[2].textContent.toLowerCase();
+                    
+                    const matchesSearch = name.includes(searchTerm) || address.includes(searchTerm);
+                    let matchesFilter = true;
+                    
+                    if (filterValue === 'open') {
+                        matchesFilter = status.includes('açyk');
+                    } else if (filterValue === '24h') {
+                        matchesFilter = hours.includes('24 sagat');
+                    }
+                    
+                    if (matchesSearch && matchesFilter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Load pharmacies on page load
+            loadPharmacies();
+            
+            // Theme toggle functionality
+            document.getElementById('theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('darkmode');
+                localStorage.setItem('theme', document.body.classList.contains('darkmode') ? 'dark' : 'light');
+            });
+            
+            // Check saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('darkmode');
+            }
+            
+            // Sidebar functionality
+            document.getElementById('burger-menu').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.add('active');
+            });
+            
+            document.getElementById('sidebar-close').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.remove('active');
+            });
+            
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('sidebar');
+                const burgerMenu = document.getElementById('burger-menu');
+                
+                if (sidebar.classList.contains('active') && 
+                    !sidebar.contains(event.target) && 
+                    !burgerMenu.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+        
+        function goToSettings() {
+            window.location.href = "setings final.html";
+        }
+    </script>
+</body>
+</html>
