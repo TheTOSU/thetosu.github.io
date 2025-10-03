@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saglyk Türkmenistan - Medeniýet portaly</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.8.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -882,11 +884,6 @@
                 <div class="logo-text">Saglyk Türkmenistan</div>
             </div>
             
-            <div class="burger-menu" id="burger-menu">
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-            </div>
             
             <nav>
                 <ul id="nav-menu">
@@ -906,6 +903,12 @@
                             <div style="font-size: 0.8rem;" id="user-email">Registrasiýa ediň</div>
                         </div>
                     </li>
+
+                    <div class="burger-menu" id="burger-menu">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                    </div>
                 </ul>
             </nav>
         </div>
@@ -919,14 +922,13 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="#" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
             <li><a href="#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
-            <li><a href="#queue"><i class="fas fa-calendar-alt"></i> Nöbet</a></li>
+            <li><a href="nobat.html"><i class="fas fa-calendar-alt"></i> Nöbet</a></li>
             <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkin kömek</a></li>
-            <li><a href="#pharmacy"><i class="fas fa-pills"></i> Aptekalar</a></li>
-            <li><a href="#ai-assistant"><i class="fas fa-robot"></i> AI Maslahat</a></li>
+            <li><a href="dermanhana.html"><i class="fas fa-pills"></i> Aptekalar</a></li>
+            <li><a href="AI maslahat.html"><i class="fas fa-robot"></i> AI Maslahat</a></li>
             <li><a href="#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
-            <li><a href="setings final.html"><i class="fas fa-cog"></i> Sazlamalar</a></li>
         </ul>
         
         <div class="user-profile-sidebar" onclick="goToSettings()">
@@ -1163,20 +1165,7 @@
             }
             
             function generateAIResponse(userInput) {
-                const responses = [
-                    "Bu barada has giňişleýin maglumat berip bilersiňizmi?",
-                    "Size kömek etmek üçin şu ýerde. Lukmana ýüz tutmagy maslahat berýärin.",
-                    "Bu alamatlar üçin derman maslahaty bermek hukugym ýok. Lukmana ýüz tutuň.",
-                    "Saglygyňyz üçin alada etýän bolsaňyz, iň gowusy lukmana ýüz tutmakdyr.",
-                    "Bu kesel barada maglumatyňyz barmy?",
-                    "Size kömek edip bildigime bagyşlaň. Başga soragyňyz barmy?",
-                    "Bu alamatlar köp kesellerde duş gelip biler. Kesgitlemek üçin lukmana ýüz tutmagy maslahat berýärin.",
-                    "Saglyk meseleleri üçn hünärli lukmana ýüz tutmagyňyz möhümdir.",
-                    "Bu barada has giňişleýin aýdyp bilersiňizmi?",
-                    "Size kömek etmek üçin şu ýerde. Soragyňyzy has anyk aýdyň."
-                ];
-                
-                return responses[Math.floor(Math.random() * responses.length)];
+
             }
             
            
