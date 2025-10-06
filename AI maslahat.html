@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saglyk Türkmenistan - Medeniýet portaly</title>
+    <title>Saglyk Türkmenistan - AI Maslahat</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -72,15 +72,16 @@
         
         .welcome-content {
             background-color: var(--card-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 500px;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 90%;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             animation: modalAppear 0.5s ease-out;
             position: relative;
             overflow: hidden;
+            margin: 1rem;
         }
         
         .welcome-content::before {
@@ -89,17 +90,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
         
         @keyframes modalAppear {
-            from { transform: translateY(-50px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
         
         .welcome-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -107,31 +108,32 @@
         .welcome-content h2 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
         
         .welcome-content p {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--text);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         
         .welcome-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             justify-content: center;
             flex-wrap: wrap;
         }
         
         .welcome-btn {
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 140px;
+            min-width: 120px;
+            flex: 1;
         }
         
         .welcome-btn-primary {
@@ -158,8 +160,8 @@
         .registration-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
             text-align: left;
         }
         
@@ -169,10 +171,10 @@
         
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             background: var(--bg);
             color: var(--text);
             transition: all 0.3s ease;
@@ -181,23 +183,23 @@
         .form-input:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 135, 83, 0.1);
+            box-shadow: 0 0 0 2px rgba(0, 135, 83, 0.1);
         }
         
         .form-label {
             position: absolute;
-            top: -10px;
-            left: 10px;
+            top: -8px;
+            left: 8px;
             background: var(--card-bg);
-            padding: 0 5px;
-            font-size: 0.9rem;
+            padding: 0 4px;
+            font-size: 0.8rem;
             color: var(--primary);
         }
         
         .password-strength {
-            height: 5px;
-            margin-top: 5px;
-            border-radius: 5px;
+            height: 4px;
+            margin-top: 4px;
+            border-radius: 4px;
             transition: all 0.3s ease;
             width: 0%;
         }
@@ -212,8 +214,8 @@
         header {
             background: linear-gradient(135deg, var(--primary), #006441);
             color: var(--secondary);
-            padding: 1rem;
-            box-shadow: 0 2px 10px var(--shadow);
+            padding: 0.8rem 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -230,23 +232,23 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .logo-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--secondary);
         }
         
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
         }
         
@@ -255,8 +257,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            padding: 0.5rem;
-            border-radius: 5px;
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
         
         nav a:hover, nav a.active {
@@ -267,13 +270,13 @@
             background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 50px;
-            width: 60px;
-            height: 30px;
+            width: 50px;
+            height: 26px;
             position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
-            padding: 0 5px;
+            padding: 0 4px;
             transition: all 0.3s ease;
         }
         
@@ -284,8 +287,8 @@
         .theme-toggle::before {
             content: '';
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: white;
             transition: all 0.3s ease;
@@ -293,12 +296,12 @@
         }
         
         .darkmode .theme-toggle::before {
-            left: calc(100% - 27px);
+            left: calc(100% - 23px);
             background: #FFD700;
         }
         
         .theme-icon {
-            font-size: 14px;
+            font-size: 12px;
             z-index: 1;
             transition: all 0.3s ease;
         }
@@ -316,18 +319,19 @@
         .sidebar{
             position: fixed;
             top: 0;
-            right: -300px;
+            right: -100%;
             height: 100vh;
-            width: 280px;
+            width: 85%;
+            max-width: 300px;
             z-index: 999;
             background-color: var(--card-bg);
             backdrop-filter: blur(10px);
-            box-shadow: -10px 0 10px var(--shadow);
+            box-shadow: -5px 0 15px var(--shadow);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
-            padding: 20px;
+            padding: 1rem;
             transition: right 0.3s ease;
         }
         
@@ -340,7 +344,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border);
         }
@@ -351,6 +355,7 @@
             color: var(--text);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.2rem;
         }
         
         .sidebar-menu {
@@ -359,19 +364,20 @@
         }
         
         .sidebar-menu li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
         
         .sidebar-menu a {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 0.8rem;
             color: var(--text);
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             width: 100%;
+            font-size: 0.9rem;
         }
         
         .sidebar-menu a:hover, .sidebar-menu a.active {
@@ -383,9 +389,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 1rem;
+            padding: 0.8rem;
             background: var(--light);
-            border-radius: 10px;
+            border-radius: 8px;
             margin-top: auto;
             width: 100%;
             cursor: pointer;
@@ -397,8 +403,8 @@
         }
         
         .user-avatar-sidebar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
@@ -406,7 +412,7 @@
             justify-content: center;
             font-weight: bold;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .user-info-sidebar {
@@ -416,21 +422,22 @@
         .user-info-sidebar div:first-child {
             font-weight: bold;
             margin-bottom: 0.2rem;
+            font-size: 0.9rem;
         }
         
         .user-info-sidebar div:last-child {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
         }
         
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: white;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
+            padding: 0.4rem;
+            border-radius: 4px;
             transition: all 0.3s ease;
         }
         
@@ -439,8 +446,8 @@
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
@@ -448,96 +455,23 @@
             justify-content: center;
             font-weight: bold;
             color: white;
+            font-size: 0.9rem;
         }
         
         .burger-menu {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
         
         .burger-line {
-            width: 25px;
-            height: 3px;
+            width: 22px;
+            height: 2.5px;
             background-color: white;
             border-radius: 2px;
             transition: all 0.3s ease;
-        }
-        
-        .register-section {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 500px;
-            text-align: center;
-        }
-        
-        .hero {
-            background: linear-gradient(rgba(0, 135, 83, 0.8), rgba(0, 100, 65, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23008753" opacity="0.1"/><path d="M0 0L100 100" stroke="%23008753" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23008753" stroke-width="2" opacity="0.2"/></svg>');
-            background-size: cover;
-            padding: 4rem 1rem;
-            text-align: center;
-            color: white;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--secondary);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: #c10024;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-        
-        .btn-secondary {
-            background-color: var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #006441;
-        }
-        
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
         }
         
         .container {
@@ -548,109 +482,56 @@
         
         .section-title {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--primary);
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
-        
-        .features {
-            margin: 3rem auto;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .services {
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 3rem 1rem;
-        }
-        
-        .service-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .service-item {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .service-item:hover {
-            transform: scale(1.03);
-        }
-        
-        .service-item h3 {
-            margin-bottom: 1rem;
-        }
-        
         
         .ai-assistant {
             background-color: var(--light);
-            padding: 3rem 1rem;
-            margin: 3rem auto;
+            padding: 2rem 1rem;
+            margin: 2rem auto;
+            min-height: calc(100vh - 200px);
         }
         
         .chat-container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             background: var(--card-bg);
             border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow);
+            box-shadow: 0 4px 12px var(--shadow);
             overflow: hidden;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
         }
         
         .chat-header {
             background: var(--primary);
             color: white;
-            padding: 1rem;
+            padding: 0.8rem;
             text-align: center;
         }
         
+        .chat-header h3 {
+            font-size: 1.1rem;
+        }
+        
         .chat-messages {
-            height: 300px;
+            flex: 1;
             overflow-y: auto;
             padding: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
         }
         
         .message {
-            max-width: 80%;
-            padding: 0.8rem;
+            max-width: 85%;
+            padding: 0.7rem;
             border-radius: 10px;
+            font-size: 0.9rem;
+            word-wrap: break-word;
         }
         
         .user-message {
@@ -667,78 +548,61 @@
         
         .chat-input {
             display: flex;
-            padding: 1rem;
-            border-top: 1px solid #ddd;
+            padding: 0.8rem;
+            border-top: 1px solid var(--border);
+            background: var(--card-bg);
         }
         
         .chat-input input {
             flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
+            padding: 0.7rem;
+            border: 1px solid var(--border);
             border-radius: 5px 0 0 5px;
-            font-size: 1rem;
-            background-color: var(--card-bg);
+            font-size: 0.9rem;
+            background-color: var(--bg);
             color: var(--text);
         }
         
         .chat-input button {
             border-radius: 0 5px 5px 0;
+            padding: 0 1rem;
+            font-size: 0.9rem;
         }
         
         .typing-indicator {
             display: none;
             align-self: flex-start;
-            padding: 0.8rem;
+            padding: 0.7rem;
             background: var(--light);
             border-radius: 10px;
             color: var(--text);
             font-style: italic;
+            font-size: 0.9rem;
         }
         
-        .status.open {
-            background: var(--success);
-            color: white;
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--secondary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
         
-        .status.closed {
-            background: var(--accent);
-            color: white;
+        .btn:hover {
+            background-color: #c10024;
+            transform: translateY(-2px);
         }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            color: var(--text);
-        }
-        
-        .modal-icon {
-            font-size: 3rem;
-            color: var(--success);
-            margin-bottom: 1rem;
-        }
-        
         
         footer {
             background-color: var(--dark);
             color: var(--secondary);
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
         }
         
@@ -746,21 +610,23 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            text-align: left;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            text-align: center;
         }
         
         .footer-section h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--secondary);
+            font-size: 1.1rem;
         }
         
         .footer-section p, .footer-section a {
             color: #ccc;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             display: block;
             text-decoration: none;
+            font-size: 0.9rem;
         }
         
         .footer-section a:hover {
@@ -769,56 +635,77 @@
         
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            justify-content: center;
         }
         
         .social-links a {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         
         .copyright {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid #555;
             grid-column: 1 / -1;
             text-align: center;
+            font-size: 0.8rem;
         }
         
+        /* Mobile-specific improvements */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                gap: 1rem;
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
             }
             
             nav ul {
-                flex-direction: column;
-                text-align: center;
                 gap: 0.5rem;
+            }
+            
+            .user-profile {
+                display: none;
             }
             
             .burger-menu {
                 display: flex;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .ai-assistant {
+                padding: 1.5rem 0.8rem;
+                margin: 1.5rem auto;
             }
             
-            .map-controls {
-                flex-direction: column;
+            .chat-container {
+                height: 450px;
             }
             
-            .form-row {
-                flex-direction: column;
+            .chat-messages {
+                padding: 0.8rem;
+            }
+            
+            .message {
+                max-width: 90%;
+                padding: 0.6rem;
+                font-size: 0.85rem;
+            }
+            
+            .chat-input {
+                padding: 0.6rem;
             }
             
             .footer-content {
-                text-align: center;
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
             }
             
-            .social-links {
-                justify-content: center;
+            .welcome-content {
+                padding: 1.5rem;
             }
             
             .welcome-buttons {
@@ -828,7 +715,63 @@
             .welcome-btn {
                 width: 100%;
             }
-        }   
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0.5rem;
+            }
+            
+            .logo {
+                gap: 5px;
+            }
+            
+            .logo-icon {
+                font-size: 1.3rem;
+            }
+            
+            .logo-text {
+                font-size: 0.9rem;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 24px;
+            }
+            
+            .theme-toggle::before {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .ai-assistant {
+                padding: 1rem 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .chat-container {
+                height: 400px;
+            }
+            
+            .chat-header h3 {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Touch improvements */
+        @media (hover: none) {
+            .btn:hover, .welcome-btn:hover, .sidebar-menu a:hover, .user-profile-sidebar:hover {
+                transform: none;
+            }
+            
+            .btn:active, .welcome-btn:active {
+                transform: scale(0.98);
+            }
+        }
     </style>
 </head>
 <body>
@@ -906,7 +849,7 @@
                         <div class="user-avatar" id="user-avatar">?</div>
                         <div id="user-info">
                             <div style="font-weight: 500;" id="user-name">Hasap dörediň</div>
-                            <div style="font-size: 0.8rem;" id="user-email">Registrasiýa ediň</div>
+                            <div style="font-size: 0.7rem;" id="user-email">Registrasiýa ediň</div>
                         </div>
                     </li>
 
@@ -930,13 +873,13 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="#" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
-            <li><a href="#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
-            <li><a href="#queue"><i class="fas fa-calendar-alt"></i> Nobat</a></li>
-            <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkinji kömek</a></li>
-            <li><a href="#pharmacy"><i class="fas fa-pills"></i> Aptekalar</a></li>
-            <li><a href="#ai-assistant"><i class="fas fa-robot"></i> AI Maslahat</a></li>
-            <li><a href="#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
+            <li><a href="index.html"><i class="fas fa-home"></i> Baş sahypa</a></li>
+            <li><a href="index.html#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
+            <li><a href="nobat.html"><i class="fas fa-calendar-alt"></i> Nobat</a></li>
+            <li><a href="index.html#first-aid"><i class="fas fa-first-aid"></i> Ilkinji kömek</a></li>
+            <li><a href="dermanhana.html"><i class="fas fa-pills"></i> Aptekalar</a></li>
+            <li><a href="AI maslahat.html" class="active"><i class="fas fa-robot"></i> AI Maslahat</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
         </ul>
         
         <div class="user-profile-sidebar" onclick="goToSettings()">
@@ -986,10 +929,10 @@
             
             <div class="footer-section">
                 <h3>Biziň hyzmatlarymyz</h3>
-                <a href="#queue">Onlaýn nöbet</a>
-                <a href="#ai-assistant">AI Maslahatçy</a>
-                <a href="#pharmacy">Aptekalar</a>
-                <a href="#first-aid">Ilkin kömek</a>
+                <a href="nobat.html">Onlaýn nöbet</a>
+                <a href="AI maslahat.html">AI Maslahatçy</a>
+                <a href="dermanhana.html">Aptekalar</a>
+                <a href="index.html#first-aid">Ilkin kömek</a>
             </div>
             
             <div class="footer-section">
@@ -1142,100 +1085,96 @@
             
             burgerMenu.addEventListener('click', function() {
                 sidebar.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
             
             sidebarClose.addEventListener('click', function() {
                 sidebar.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
             
             // Close sidebar when clicking outside
             document.addEventListener('click', function(event) {
-                if (sidebar.classList.contains('active') && 
-                    !sidebar.contains(event.target) && 
-                    !burgerMenu.contains(event.target)) {
+                if (!sidebar.contains(event.target) && !burgerMenu.contains(event.target) && sidebar.classList.contains('active')) {
                     sidebar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
             });
             
             // Theme toggle functionality
-            document.getElementById('theme-toggle').addEventListener('click', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme preference or use OS preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.body.classList.add('darkmode');
+            }
+            
+            themeToggle.addEventListener('click', function() {
                 document.body.classList.toggle('darkmode');
                 localStorage.setItem('theme', document.body.classList.contains('darkmode') ? 'dark' : 'light');
             });
             
-            // Check for saved theme preference
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('darkmode');
-            }
-            
-            // AI Assistant functionality
+            // AI Chat functionality
             const chatMessages = document.getElementById('chat-messages');
             const userInput = document.getElementById('user-input');
             const sendBtn = document.getElementById('send-btn');
             const typingIndicator = document.getElementById('typing-indicator');
             
-            sendBtn.addEventListener('click', sendMessage);
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            async function sendMessage() {
-                const message = userInput.value.trim();
-                if (!message) return;
-                
-                // Add user message to chat
-                addMessage(message, 'user');
-                userInput.value = '';
-                
-                // Show typing indicator
-                typingIndicator.style.display = 'block';
-                
-                try {
-                    // Use Puter.js AI for health advice
-                    const response = await puter.ai.chat(
-                        `You are a health assistant for Turkmenistan citizens. Provide helpful health advice in Turkmen language. 
-                        The user's message: ${message}. 
-                        Please respond in Turkmen language with helpful, accurate health information. 
-                        If the condition sounds serious, recommend seeing a doctor.`
-                    );
-                    
-                    // Hide typing indicator
-                    typingIndicator.style.display = 'none';
-                    
-                    // Add AI response to chat
-                    addMessage(response, 'ai');
-                } catch (error) {
-                    console.error('Error with AI:', error);
-                    typingIndicator.style.display = 'none';
-                    
-                    // Fallback responses in case of API issues
-                    const fallbackResponses = [
-                        "Saglyk meseleleri üçin hökman lukmana ýüz tutuň.",
-                        "Bu barada anyk maglumat almak üçin lukman bilen maslahatlaşmagyňyz maslahat berilýär.",
-                        "Saglygyňyzy goraýyş üçin düzenli derňewden geçmek we sagdyn ýaşaýyş tarapyny tutmak möhümdir.",
-                        "Alamatlar dowam etse, iň ýakyn saglyk edarasyna ýüz tutuň."
-                    ];
-                    
-                    const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
-                    addMessage(randomResponse, 'ai');
-                }
-            }
-            
-            function addMessage(text, sender) {
+            function addMessage(text, isUser) {
                 const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+                messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
                 messageDiv.textContent = text;
-                
                 chatMessages.appendChild(messageDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
+            
+            function simulateAIResponse(userMessage) {
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Simple AI responses based on keywords
+                let response = "Size kömek edip bilenime bagyşlaň, ýöne has gowy maslahat üçin lukmana ýüz tutmagyňyzy maslahat bererin.";
+                
+                if (userMessage.toLowerCase().includes('baş')) {
+                    response = "Baş agyrynyň birnäçe sebäbi bolup biler: stres, ýadawsyzlyk, migren ýa-da basyşyň üýtgemegi. Dinlenmek, suwuklyk iýmek we ýeňil dermanlary ulanmak kömek edip biler. Eger agyry dowam etse, lukmana ýüz tutuň.";
+                } else if (userMessage.toLowerCase().includes('garyn')) {
+                    response = "Garyn agyrynyň sebäpleri köp bolup biler: iýmit zeherlenmesi, gaz, ýara ýa-da beýleki keseller. Ýeňil iýmitler iýmek, isti suwuklyk iýmek we dynç almak kömek edip biler. Eger agyry güýçlenýän bolsa ýa-da dowam etse, derrew lukmana ýüz tutuň.";
+                } else if (userMessage.toLowerCase().includes('gyzgyn')) {
+                    response = "Bedeniň gyzgynlygy 37.5°C ýokary bolsa, sowuk kompress we parasetamol ýaly dermanlar kömek edip biler. Suwuklyk köp iýmek we dynç almak hem möhümdir. Gyzgynlyk 3 günden gowrak dowam etse ýa-da 39°C ýokary bolsa, lukmana ýüz tutuň.";
+                } else if (userMessage.toLowerCase().includes('ýürek')) {
+                    response = "Ýürek agyry ýa-da ýürek döwmegiň üýtgemegi ýürek keselleriniň alamaty bolup biler. Bu ýagdaý çalt kömek talap edýär. Derrew lukmana ýüz tutuň ýa-da tiz kömek çagyryşyna ýüz tutuň.";
+                } else if (userMessage.toLowerCase().includes('dem')) {
+                    response = "Dem alyş kynçylyklary astma, bronhit ýa-da beýleki öýken keselleriniň alamaty bolup biler. Tiz kömek talap edýän ýagdaýdyr. Derrew lukmana ýüz tutuň.";
+                }
+                
+                // Simulate typing delay
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    addMessage(response, false);
+                }, 1500);
+            }
+            
+            sendBtn.addEventListener('click', function() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    userInput.value = '';
+                    simulateAIResponse(message);
+                }
+            });
+            
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendBtn.click();
+                }
+            });
         });
         
         function goToSettings() {
-            window.location.href = "setings final.html";
+            alert('Sazlamalar sahypasy işlenilýär...');
         }
     </script>
 </body>

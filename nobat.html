@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saglyk Türkmenistan - Medeniýet portaly</title>
+    <title>Saglyk Türkmenistan - Nobat</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -71,15 +72,16 @@
         
         .welcome-content {
             background-color: var(--card-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 500px;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 90%;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             animation: modalAppear 0.5s ease-out;
             position: relative;
             overflow: hidden;
+            margin: 1rem;
         }
         
         .welcome-content::before {
@@ -88,17 +90,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
         }
         
         @keyframes modalAppear {
-            from { transform: translateY(-50px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
         
         .welcome-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -106,31 +108,32 @@
         .welcome-content h2 {
             color: var(--primary);
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
         
         .welcome-content p {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--text);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         
         .welcome-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             justify-content: center;
             flex-wrap: wrap;
         }
         
         .welcome-btn {
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 140px;
+            min-width: 120px;
+            flex: 1;
         }
         
         .welcome-btn-primary {
@@ -157,8 +160,8 @@
         .registration-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
             text-align: left;
         }
         
@@ -168,10 +171,10 @@
         
         .form-input {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             background: var(--bg);
             color: var(--text);
             transition: all 0.3s ease;
@@ -180,23 +183,23 @@
         .form-input:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 135, 83, 0.1);
+            box-shadow: 0 0 0 2px rgba(0, 135, 83, 0.1);
         }
         
         .form-label {
             position: absolute;
-            top: -10px;
-            left: 10px;
+            top: -8px;
+            left: 8px;
             background: var(--card-bg);
-            padding: 0 5px;
-            font-size: 0.9rem;
+            padding: 0 4px;
+            font-size: 0.8rem;
             color: var(--primary);
         }
         
         .password-strength {
-            height: 5px;
-            margin-top: 5px;
-            border-radius: 5px;
+            height: 4px;
+            margin-top: 4px;
+            border-radius: 4px;
             transition: all 0.3s ease;
             width: 0%;
         }
@@ -211,8 +214,8 @@
         header {
             background: linear-gradient(135deg, var(--primary), #006441);
             color: var(--secondary);
-            padding: 1rem;
-            box-shadow: 0 2px 10px var(--shadow);
+            padding: 0.8rem 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -229,23 +232,23 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .logo-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--secondary);
         }
         
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
         }
         
@@ -254,8 +257,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            padding: 0.5rem;
-            border-radius: 5px;
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
         
         nav a:hover, nav a.active {
@@ -266,13 +270,13 @@
             background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 50px;
-            width: 60px;
-            height: 30px;
+            width: 50px;
+            height: 26px;
             position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
-            padding: 0 5px;
+            padding: 0 4px;
             transition: all 0.3s ease;
         }
         
@@ -283,8 +287,8 @@
         .theme-toggle::before {
             content: '';
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: white;
             transition: all 0.3s ease;
@@ -292,12 +296,12 @@
         }
         
         .darkmode .theme-toggle::before {
-            left: calc(100% - 27px);
+            left: calc(100% - 23px);
             background: #FFD700;
         }
         
         .theme-icon {
-            font-size: 14px;
+            font-size: 12px;
             z-index: 1;
             transition: all 0.3s ease;
         }
@@ -315,18 +319,19 @@
         .sidebar{
             position: fixed;
             top: 0;
-            right: -300px;
+            right: -100%;
             height: 100vh;
-            width: 280px;
+            width: 85%;
+            max-width: 300px;
             z-index: 999;
             background-color: var(--card-bg);
             backdrop-filter: blur(10px);
-            box-shadow: -10px 0 10px var(--shadow);
+            box-shadow: -5px 0 15px var(--shadow);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
-            padding: 20px;
+            padding: 1rem;
             transition: right 0.3s ease;
         }
         
@@ -339,7 +344,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border);
         }
@@ -350,6 +355,7 @@
             color: var(--text);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.2rem;
         }
         
         .sidebar-menu {
@@ -358,19 +364,20 @@
         }
         
         .sidebar-menu li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
         
         .sidebar-menu a {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 0.8rem;
             color: var(--text);
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             width: 100%;
+            font-size: 0.9rem;
         }
         
         .sidebar-menu a:hover, .sidebar-menu a.active {
@@ -382,9 +389,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 1rem;
+            padding: 0.8rem;
             background: var(--light);
-            border-radius: 10px;
+            border-radius: 8px;
             margin-top: auto;
             width: 100%;
             cursor: pointer;
@@ -396,8 +403,8 @@
         }
         
         .user-avatar-sidebar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
@@ -405,7 +412,7 @@
             justify-content: center;
             font-weight: bold;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .user-info-sidebar {
@@ -415,21 +422,22 @@
         .user-info-sidebar div:first-child {
             font-weight: bold;
             margin-bottom: 0.2rem;
+            font-size: 0.9rem;
         }
         
         .user-info-sidebar div:last-child {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-light);
         }
         
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: white;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 5px;
+            padding: 0.4rem;
+            border-radius: 4px;
             transition: all 0.3s ease;
         }
         
@@ -438,8 +446,8 @@
         }
         
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
@@ -447,96 +455,23 @@
             justify-content: center;
             font-weight: bold;
             color: white;
+            font-size: 0.9rem;
         }
         
         .burger-menu {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
         
         .burger-line {
-            width: 25px;
-            height: 3px;
+            width: 22px;
+            height: 2.5px;
             background-color: white;
             border-radius: 2px;
             transition: all 0.3s ease;
-        }
-        
-        .register-section {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 500px;
-            text-align: center;
-        }
-        
-        .hero {
-            background: linear-gradient(rgba(0, 135, 83, 0.8), rgba(0, 100, 65, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23008753" opacity="0.1"/><path d="M0 0L100 100" stroke="%23008753" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%23008753" stroke-width="2" opacity="0.2"/></svg>');
-            background-size: cover;
-            padding: 4rem 1rem;
-            text-align: center;
-            color: white;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--secondary);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: #c10024;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-        
-        .btn-secondary {
-            background-color: var(--primary);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #006441;
-        }
-        
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
         }
         
         .container {
@@ -547,175 +482,184 @@
         
         .section-title {
             text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .appointment {
+            background-color: var(--light);
+            padding: 2rem 1rem;
+            margin: 2rem auto;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .appointment-form {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
             margin-bottom: 2rem;
-            color: var(--primary);
-            font-size: 2rem;
-        }
-        
-        .features {
-            margin: 3rem auto;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .services {
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 3rem 1rem;
-        }
-        
-        .service-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .service-item {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .service-item:hover {
-            transform: scale(1.03);
-        }
-        
-        .service-item h3 {
-            margin-bottom: 1rem;
-        }
-        
-        .queue-system {
-            margin: 3rem auto;
-        }
-        
-        .queue-form {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
-            flex: 1;
-            min-width: 250px;
+            margin-bottom: 1.2rem;
         }
         
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--text);
         }
         
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
             padding: 0.8rem;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border);
             border-radius: 5px;
-            font-size: 1rem;
-            transition: border 0.3s ease;
-            background-color: var(--card-bg);
+            font-size: 0.9rem;
+            background-color: var(--bg);
             color: var(--text);
         }
         
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-control:focus {
             border-color: var(--primary);
             outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 135, 83, 0.1);
         }
         
-        .status.open {
-            background: var(--success);
+        .appointment-list {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .appointment-card {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .appointment-card:hover {
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .appointment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .appointment-doctor {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .appointment-date {
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .appointment-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .appointment-status {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-confirmed {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+        
+        .status-cancelled {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--accent);
+        }
+        
+        .appointment-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .btn-edit {
+            background: var(--info);
             color: white;
         }
         
-        .status.closed {
+        .btn-cancel {
             background: var(--accent);
             color: white;
         }
         
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
+        .btn-reschedule {
+            background: var(--warning);
+            color: var(--dark);
         }
         
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 400px;
-            width: 100%;
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .no-appointments {
             text-align: center;
-            color: var(--text);
+            padding: 2rem;
+            color: var(--text-light);
         }
         
-        .modal-icon {
-            font-size: 3rem;
-            color: var(--success);
-            margin-bottom: 1rem;
-        }
-        
-        .queue-number {
-            font-size: 2rem;
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--secondary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
             font-weight: bold;
-            color: var(--accent);
-            margin: 1rem 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: #c10024;
+            transform: translateY(-2px);
         }
         
         footer {
             background-color: var(--dark);
             color: var(--secondary);
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
         }
         
@@ -723,21 +667,23 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            text-align: left;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            text-align: center;
         }
         
         .footer-section h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--secondary);
+            font-size: 1.1rem;
         }
         
         .footer-section p, .footer-section a {
             color: #ccc;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             display: block;
             text-decoration: none;
+            font-size: 0.9rem;
         }
         
         .footer-section a:hover {
@@ -746,56 +692,83 @@
         
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            justify-content: center;
         }
         
         .social-links a {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         
         .copyright {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid #555;
             grid-column: 1 / -1;
             text-align: center;
+            font-size: 0.8rem;
         }
         
+        /* Mobile-specific improvements */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                gap: 1rem;
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
             }
             
             nav ul {
-                flex-direction: column;
-                text-align: center;
                 gap: 0.5rem;
+            }
+            
+            .user-profile {
+                display: none;
             }
             
             .burger-menu {
                 display: flex;
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .appointment {
+                padding: 1.5rem 0.8rem;
+                margin: 1.5rem auto;
             }
             
-            .map-controls {
+            .appointment-form, .appointment-list {
+                padding: 1.2rem;
+            }
+            
+            .appointment-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .appointment-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .appointment-actions {
                 flex-direction: column;
             }
             
-            .form-row {
-                flex-direction: column;
-            }
-            
-            .footer-content {
+            .action-btn {
+                width: 100%;
                 text-align: center;
             }
             
-            .social-links {
-                justify-content: center;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            
+            .welcome-content {
+                padding: 1.5rem;
             }
             
             .welcome-buttons {
@@ -805,16 +778,77 @@
             .welcome-btn {
                 width: 100%;
             }
-        }   
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0.5rem;
+            }
+            
+            .logo {
+                gap: 5px;
+            }
+            
+            .logo-icon {
+                font-size: 1.3rem;
+            }
+            
+            .logo-text {
+                font-size: 0.9rem;
+            }
+            
+            .theme-toggle {
+                width: 45px;
+                height: 24px;
+            }
+            
+            .theme-toggle::before {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .appointment {
+                padding: 1rem 0.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .appointment-form, .appointment-list {
+                padding: 1rem;
+            }
+            
+            .appointment-card {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Touch improvements */
+        @media (hover: none) {
+            .btn:hover, .welcome-btn:hover, .sidebar-menu a:hover, .user-profile-sidebar:hover, .appointment-card:hover, .action-btn:hover {
+                transform: none;
+            }
+            
+            .btn:active, .welcome-btn:active {
+                transform: scale(0.98);
+            }
+            
+            .appointment-card:active {
+                transform: scale(0.98);
+            }
+        }
     </style>
 </head>
 <body>
+    <script src="https://js.puter.com/v2/"></script>
     <!-- Welcome Modal -->
     <div class="welcome-modal" id="welcome-modal">
         <div class="welcome-content">
             <div class="welcome-icon">⚕</div>
-            <p>Türkmenistanyň saglyk ulgamyna resmi web sahypasy. Hasap döretmek ýa-da öňem döredilen hasaba girmek üçin aşakdaky opsiýalary ulanyň.</p>
-            
+            <h2>Saglyk Türkmenistana hoş geldiňiz!</h2>
+           
             <div class="registration-form" id="login-form">
                 <div class="form-input-group">
                     <input type="email" id="login-email" class="form-input" placeholder=" " required>
@@ -869,8 +903,6 @@
                 <div class="logo-text">Saglyk Türkmenistan</div>
             </div>
             
-            
-            
             <nav>
                 <ul id="nav-menu">
                     <li class="theme-toggle-container">
@@ -884,15 +916,17 @@
                         <div class="user-avatar" id="user-avatar">?</div>
                         <div id="user-info">
                             <div style="font-weight: 500;" id="user-name">Hasap dörediň</div>
-                            <div style="font-size: 0.8rem;" id="user-email">Registrasiýa ediň</div>
+                            <div style="font-size: 0.7rem;" id="user-email">Registrasiýa ediň</div>
                         </div>
                     </li>
-                    <div class="burger-menu" id="burger-menu">
-                        <div class="burger-line"></div>
-                        <div class="burger-line"></div>
-                        <div class="burger-line"></div>
-                    </div>
 
+                    <li>
+                        <div class="burger-menu" id="burger-menu">
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -906,13 +940,13 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
-            <li><a href="#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
-            <li><a href="nobat"><i class="fas fa-calendar-alt"></i> Nöbet</a></li>
-            <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkin kömek</a></li>
+            <li><a href="index.html"><i class="fas fa-home"></i> Baş sahypa</a></li>
+            <li><a href="index.html#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
+            <li><a href="nobat.html" class="active"><i class="fas fa-calendar-alt"></i> Nobat</a></li>
+            <li><a href="index.html#first-aid"><i class="fas fa-first-aid"></i> Ilkinji kömek</a></li>
             <li><a href="dermanhana.html"><i class="fas fa-pills"></i> Aptekalar</a></li>
             <li><a href="AI maslahat.html"><i class="fas fa-robot"></i> AI Maslahat</a></li>
-            <li><a href="#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
+            <li><a href="index.html#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
         </ul>
         
         <div class="user-profile-sidebar" onclick="goToSettings()">
@@ -924,60 +958,61 @@
         </div>
     </aside>
 
-
-    <section class="queue-system container" id="queue">
-        <h2 class="section-title">Onlaýn nöbet alyň</h2>
-        <div class="queue-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="patient-name">Adyňyz we familiýaňyz:</label>
-                    <input type="text" id="patient-name" placeholder="Adyňyz we familiýaňyz">
-                </div>
-                <div class="form-group">
-                    <label for="patient-phone">Telefon belgiňiz:</label>
-                    <input type="tel" id="patient-phone" placeholder="+993">
-                </div>
+    <section class="appointment" id="appointment">
+        <div class="container">
+            <h2 class="section-title">Onlaýn Nobat</h2>
+            
+            <div class="appointment-form">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Täze nobat almak</h3>
+                <form id="appointment-form">
+                    <div class="form-group">
+                        <label class="form-label" for="doctor">Lukman</label>
+                        <select class="form-control" id="doctor" required>
+                            <option value="">Lukmany saýlaň</option>
+                            <option value="dr-ahmedov">Dr. Ahmedow - Terapewt</option>
+                            <option value="dr-berdiyeva">Dr. Berdiýewa - Pediatri</option>
+                            <option value="dr-mammedov">Dr. Mämmedow - Kardialog</option>
+                            <option value="dr-gurbanova">Dr. Gurbanowa - Ginekolog</option>
+                            <option value="dr-saparov">Dr. Saparow - Stomatolog</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="date">Sene</label>
+                        <input type="date" class="form-control" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="time">Wagty</label>
+                        <select class="form-control" id="time" required>
+                            <option value="">Wagty saýlaň</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="reason">Sebäbi</label>
+                        <textarea class="form-control" id="reason" rows="3" placeholder="Nobatyňyzyň sebäbini ýazyň..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Nobat almak</button>
+                </form>
             </div>
             
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="doctor-specialty">Lukmanyň hünäri:</label>
-                    <select id="doctor-specialty">
-                        <option value="">Saýlaň</option>
-                        <option value="pediatrician">Çagalar lukmany</option>
-                        <option value="gynecologist">Ginekolog</option>
-                        <option value="cardiologist">Kardiolog</option>
-                        <option value="dentist">Stomatolog</option>
-                        <option value="therapist">Terapewt</option>
-                        <option value="surgeon">Hirurg</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="appointment-date">Geljek wagty:</label>
-                    <input type="date" id="appointment-date">
+            <div class="appointment-list">
+                <h3 style="margin-bottom: 1rem; color: var(--primary);">Meniň nobatlarym</h3>
+                <div id="appointments-container">
+                    <!-- Appointments will be generated by JavaScript -->
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label for="symptoms">Alamatyňyz (mümkin bolsa):</label>
-                <textarea id="symptoms" rows="3" placeholder="Alamatyňyzy ýazyň..."></textarea>
-            </div>
-            
-            <button class="btn btn-secondary" id="submit-queue">Nöbeti tassyklamak</button>
         </div>
     </section>
-
-    <!-- Queue Success Modal -->
-    <div class="modal" id="queue-modal">
-        <div class="modal-content">
-            <div class="modal-icon">✓</div>
-            <h3>Nöbetiňiz kabul edildi!</h3>
-            <p>Nöbet belgiňiz:</p>
-            <div class="queue-number" id="queue-number">A-156</div>
-            <p>Geljek wagty: <span id="appointment-time"></span></p>
-            <button class="btn" id="close-modal">Bolýar</button>
-        </div>
-    </div>
 
     <footer id="contact">
         <div class="footer-content">
@@ -994,10 +1029,10 @@
             
             <div class="footer-section">
                 <h3>Biziň hyzmatlarymyz</h3>
-                <a href="#queue">Onlaýn nöbet</a>
-                <a href="#ai-assistant">AI Maslahatçy</a>
-                <a href="#pharmacy">Aptekalar</a>
-                <a href="#first-aid">Ilkin kömek</a>
+                <a href="nobat.html">Onlaýn nöbet</a>
+                <a href="AI maslahat.html">AI Maslahatçy</a>
+                <a href="dermanhana.html">Aptekalar</a>
+                <a href="index.html#first-aid">Ilkin kömek</a>
             </div>
             
             <div class="footer-section">
@@ -1110,18 +1145,16 @@
                 // Check if user already exists
                 const users = JSON.parse(localStorage.getItem('users') || '[]');
                 if (users.find(u => u.email === email)) {
-                    alert('Bu email eýýäm ulanylýar!');
+                    alert('Bu email eýýäm ulgama girizilen!');
                     return;
                 }
                 
                 // Create new user
                 const newUser = {
-                    id: Date.now(),
                     name: name,
                     email: email,
                     phone: phone,
-                    password: password,
-                    registrationDate: new Date().toLocaleDateString('tk-TM')
+                    password: password
                 };
                 
                 users.push(newUser);
@@ -1143,75 +1176,156 @@
                 document.getElementById('sidebar-user-name').textContent = user.name;
                 document.getElementById('sidebar-user-email').textContent = user.email;
                 document.getElementById('sidebar-user-avatar').textContent = user.name.charAt(0).toUpperCase();
-                
-                // Pre-fill queue form with user data
-                document.getElementById('patient-name').value = user.name;
-                document.getElementById('patient-phone').value = user.phone;
-            }
-            
-            // Queue submission
-            document.getElementById('submit-queue').addEventListener('click', function() {
-                const patientName = document.getElementById('patient-name').value;
-                const patientPhone = document.getElementById('patient-phone').value;
-                const doctorSpecialty = document.getElementById('doctor-specialty').value;
-                const appointmentDate = document.getElementById('appointment-date').value;
-                
-                if (!patientName || !patientPhone || !doctorSpecialty || !appointmentDate) {
-                    alert('Nöbet üçin ähli maglumatlar hökmany!');
-                    return;
-                }
-                
-                // Generate random queue number
-                const queueNumber = 'A-' + Math.floor(100 + Math.random() * 900);
-                document.getElementById('queue-number').textContent = queueNumber;
-                document.getElementById('appointment-time').textContent = appointmentDate;
-                
-                // Show success modal
-                document.getElementById('queue-modal').style.display = 'flex';
-            });
-            
-            // Close modal
-            document.getElementById('close-modal').addEventListener('click', function() {
-                document.getElementById('queue-modal').style.display = 'none';
-            });
-            
-        
-            
-            // Theme toggle functionality
-            document.getElementById('theme-toggle').addEventListener('click', function() {
-                document.body.classList.toggle('darkmode');
-                localStorage.setItem('theme', document.body.classList.contains('darkmode') ? 'dark' : 'light');
-            });
-            
-            // Check saved theme
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('darkmode');
             }
             
             // Sidebar functionality
-            document.getElementById('burger-menu').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.add('active');
+            const sidebar = document.getElementById('sidebar');
+            const burgerMenu = document.getElementById('burger-menu');
+            const sidebarClose = document.getElementById('sidebar-close');
+            
+            burgerMenu.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                document.body.style.overflow = 'hidden';
             });
             
-            document.getElementById('sidebar-close').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.remove('active');
+            sidebarClose.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
             
             // Close sidebar when clicking outside
             document.addEventListener('click', function(event) {
-                const sidebar = document.getElementById('sidebar');
-                const burgerMenu = document.getElementById('burger-menu');
-                
-                if (sidebar.classList.contains('active') && 
-                    !sidebar.contains(event.target) && 
-                    !burgerMenu.contains(event.target)) {
+                if (!sidebar.contains(event.target) && !burgerMenu.contains(event.target) && sidebar.classList.contains('active')) {
                     sidebar.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 }
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme preference or use OS preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                document.body.classList.add('darkmode');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('darkmode');
+                localStorage.setItem('theme', document.body.classList.contains('darkmode') ? 'dark' : 'light');
+            });
+            
+            // Appointment functionality
+            const appointmentForm = document.getElementById('appointment-form');
+            const appointmentsContainer = document.getElementById('appointments-container');
+            
+            // Load appointments from localStorage
+            let appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+            
+            // Render appointments
+            function renderAppointments() {
+                appointmentsContainer.innerHTML = '';
+                
+                if (appointments.length === 0) {
+                    appointmentsContainer.innerHTML = `
+                        <div class="no-appointments">
+                            <i class="fas fa-calendar-times" style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-light);"></i>
+                            <p>Hili nobatyňyz ýok</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                appointments.forEach((appointment, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'appointment-card';
+                    card.innerHTML = `
+                        <div class="appointment-header">
+                            <div class="appointment-doctor">${appointment.doctorName}</div>
+                            <div class="appointment-date">${appointment.date} | ${appointment.time}</div>
+                        </div>
+                        <div class="appointment-details">
+                            <div><strong>Sebäbi:</strong> ${appointment.reason || 'Sebäbi görkezilmedik'}</div>
+                        </div>
+                        <div>
+                            <span class="appointment-status ${appointment.status === 'confirmed' ? 'status-confirmed' : appointment.status === 'pending' ? 'status-pending' : 'status-cancelled'}">
+                                ${appointment.status === 'confirmed' ? 'Tassyklanan' : appointment.status === 'pending' ? 'Garaşylýar' : 'Ýatyrylan'}
+                            </span>
+                        </div>
+                        <div class="appointment-actions">
+                            <button class="action-btn btn-reschedule" onclick="rescheduleAppointment(${index})">Wagty üýtgetmek</button>
+                            <button class="action-btn btn-cancel" onclick="cancelAppointment(${index})">Nobaty ýatyr</button>
+                        </div>
+                    `;
+                    appointmentsContainer.appendChild(card);
+                });
+            }
+            
+            // Initial render
+            renderAppointments();
+            
+            // Handle new appointment form submission
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const doctorSelect = document.getElementById('doctor');
+                const dateInput = document.getElementById('date');
+                const timeSelect = document.getElementById('time');
+                const reasonTextarea = document.getElementById('reason');
+                
+                const doctorValue = doctorSelect.value;
+                const doctorName = doctorSelect.options[doctorSelect.selectedIndex].text;
+                const date = dateInput.value;
+                const time = timeSelect.value;
+                const reason = reasonTextarea.value;
+                
+                if (!doctorValue || !date || !time) {
+                    alert('Ähli hökmany meýdanlary dolduryň!');
+                    return;
+                }
+                
+                const newAppointment = {
+                    id: Date.now(),
+                    doctor: doctorValue,
+                    doctorName: doctorName,
+                    date: date,
+                    time: time,
+                    reason: reason,
+                    status: 'pending'
+                };
+                
+                appointments.push(newAppointment);
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                
+                // Reset form
+                appointmentForm.reset();
+                
+                // Re-render appointments
+                renderAppointments();
+                
+                alert('Nobatyňyz üstünlikli goşuldy!');
             });
         });
         
+        function rescheduleAppointment(index) {
+            alert('Wagty üýtgetmek hyzmaty işlenilýär...');
+        }
+        
+        function cancelAppointment(index) {
+            if (confirm('Bu nobaty ýatyrjakdygyňyzy anyklaýarsyňyzmy?')) {
+                let appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+                appointments[index].status = 'cancelled';
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                
+                // Re-render appointments
+                document.dispatchEvent(new Event('DOMContentLoaded'));
+                alert('Nobatyňyz üstünlikli ýatyryldy!');
+            }
+        }
+        
         function goToSettings() {
-            window.location.href = "setings final.html";
+            alert('Sazlamalar sahypasy işlenilýär...');
         }
     </script>
 </body>
