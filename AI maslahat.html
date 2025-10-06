@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saglyk Türkmenistan - Medeniýet portaly</title>
-    <link rel="stylesheet" href="https://pyscript.net/releases/2025.8.1/core.css" />
-    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -686,6 +685,15 @@
             border-radius: 0 5px 5px 0;
         }
         
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 0.8rem;
+            background: var(--light);
+            border-radius: 10px;
+            color: var(--text);
+            font-style: italic;
+        }
         
         .status.open {
             background: var(--success);
@@ -824,6 +832,7 @@
     </style>
 </head>
 <body>
+    <script src="https://js.puter.com/v2/"></script>
     <!-- Welcome Modal -->
     <div class="welcome-modal" id="welcome-modal">
         <div class="welcome-content">
@@ -884,11 +893,8 @@
                 <div class="logo-text">Saglyk Türkmenistan</div>
             </div>
             
-            
             <nav>
                 <ul id="nav-menu">
-                   
-                    
                     <li class="theme-toggle-container">
                         <button class="theme-toggle" id="theme-toggle">
                             <i class="fas fa-sun theme-icon sun-icon"></i>
@@ -904,11 +910,13 @@
                         </div>
                     </li>
 
-                    <div class="burger-menu" id="burger-menu">
-                        <div class="burger-line"></div>
-                        <div class="burger-line"></div>
-                        <div class="burger-line"></div>
-                    </div>
+                    <li>
+                        <div class="burger-menu" id="burger-menu">
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                            <div class="burger-line"></div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -922,12 +930,12 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Baş sahypa</a></li>
             <li><a href="#services"><i class="fas fa-stethoscope"></i> Hyzmatlar</a></li>
-            <li><a href="nobat.html"><i class="fas fa-calendar-alt"></i> Nöbet</a></li>
-            <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkin kömek</a></li>
-            <li><a href="dermanhana.html"><i class="fas fa-pills"></i> Aptekalar</a></li>
-            <li><a href="AI maslahat.html"><i class="fas fa-robot"></i> AI Maslahat</a></li>
+            <li><a href="#queue"><i class="fas fa-calendar-alt"></i> Nobat</a></li>
+            <li><a href="#first-aid"><i class="fas fa-first-aid"></i> Ilkinji kömek</a></li>
+            <li><a href="#pharmacy"><i class="fas fa-pills"></i> Aptekalar</a></li>
+            <li><a href="#ai-assistant"><i class="fas fa-robot"></i> AI Maslahat</a></li>
             <li><a href="#contact"><i class="fas fa-phone"></i> Aragatnaşyk</a></li>
         </ul>
         
@@ -939,9 +947,6 @@
             </div>
         </div>
     </aside>
-
-
-    
 
     <section class="ai-assistant" id="ai-assistant">
         <div class="container">
@@ -955,6 +960,9 @@
                         Salam! Men siziň saglygyňyz boýunça maslahat berip bilerin. Size nädogry? Alamatyňyzy we soraglaryňyzy ýazyň.
                     </div>
                 </div>
+                <div class="typing-indicator" id="typing-indicator">
+                    AI Maslahatçy ýazýar...
+                </div>
                 <div class="chat-input">
                     <input type="text" id="user-input" placeholder="Meniň soragym...">
                     <button class="btn" id="send-btn">Ugratmak</button>
@@ -962,7 +970,6 @@
             </div>
         </div>
     </section>
-
 
     <footer id="contact">
         <div class="footer-content">
@@ -1095,18 +1102,16 @@
                 // Check if user already exists
                 const users = JSON.parse(localStorage.getItem('users') || '[]');
                 if (users.find(u => u.email === email)) {
-                    alert('Bu email eýýäm ulanylýar!');
+                    alert('Bu email eýýäm ulgama girizilen!');
                     return;
                 }
                 
                 // Create new user
                 const newUser = {
-                    id: Date.now(),
                     name: name,
                     email: email,
                     phone: phone,
-                    password: password,
-                    registrationDate: new Date().toLocaleDateString('tk-TM')
+                    password: password
                 };
                 
                 users.push(newUser);
@@ -1128,48 +1133,29 @@
                 document.getElementById('sidebar-user-name').textContent = user.name;
                 document.getElementById('sidebar-user-email').textContent = user.email;
                 document.getElementById('sidebar-user-avatar').textContent = user.name.charAt(0).toUpperCase();
-                
             }
             
+            // Sidebar functionality
+            const sidebar = document.getElementById('sidebar');
+            const burgerMenu = document.getElementById('burger-menu');
+            const sidebarClose = document.getElementById('sidebar-close');
             
-            // AI Chat functionality
-            document.getElementById('send-btn').addEventListener('click', sendMessage);
-            document.getElementById('user-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') sendMessage();
+            burgerMenu.addEventListener('click', function() {
+                sidebar.classList.add('active');
             });
             
-            function sendMessage() {
-                const userInput = document.getElementById('user-input').value.trim();
-                if (!userInput) return;
-                
-                // Add user message to chat
-                addMessage(userInput, 'user');
-                
-                // Clear input
-                document.getElementById('user-input').value = '';
-                
-                // Generate AI response
-                setTimeout(() => {
-                    const aiResponse = generateAIResponse(userInput);
-                    addMessage(aiResponse, 'ai');
-                }, 1000);
-            }
+            sidebarClose.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+            });
             
-            function addMessage(text, sender) {
-                const chatMessages = document.getElementById('chat-messages');
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${sender}-message`;
-                messageDiv.textContent = text;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            function generateAIResponse(userInput) {
-
-            }
-            
-           
-           
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                if (sidebar.classList.contains('active') && 
+                    !sidebar.contains(event.target) && 
+                    !burgerMenu.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            });
             
             // Theme toggle functionality
             document.getElementById('theme-toggle').addEventListener('click', function() {
@@ -1177,31 +1163,75 @@
                 localStorage.setItem('theme', document.body.classList.contains('darkmode') ? 'dark' : 'light');
             });
             
-            // Check saved theme
+            // Check for saved theme preference
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('darkmode');
             }
             
-            // Sidebar functionality
-            document.getElementById('burger-menu').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.add('active');
-            });
+            // AI Assistant functionality
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const typingIndicator = document.getElementById('typing-indicator');
             
-            document.getElementById('sidebar-close').addEventListener('click', function() {
-                document.getElementById('sidebar').classList.remove('active');
-            });
-            
-            // Close sidebar when clicking outside
-            document.addEventListener('click', function(event) {
-                const sidebar = document.getElementById('sidebar');
-                const burgerMenu = document.getElementById('burger-menu');
-                
-                if (sidebar.classList.contains('active') && 
-                    !sidebar.contains(event.target) && 
-                    !burgerMenu.contains(event.target)) {
-                    sidebar.classList.remove('active');
+            sendBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
                 }
             });
+            
+            async function sendMessage() {
+                const message = userInput.value.trim();
+                if (!message) return;
+                
+                // Add user message to chat
+                addMessage(message, 'user');
+                userInput.value = '';
+                
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                
+                try {
+                    // Use Puter.js AI for health advice
+                    const response = await puter.ai.chat(
+                        `You are a health assistant for Turkmenistan citizens. Provide helpful health advice in Turkmen language. 
+                        The user's message: ${message}. 
+                        Please respond in Turkmen language with helpful, accurate health information. 
+                        If the condition sounds serious, recommend seeing a doctor.`
+                    );
+                    
+                    // Hide typing indicator
+                    typingIndicator.style.display = 'none';
+                    
+                    // Add AI response to chat
+                    addMessage(response, 'ai');
+                } catch (error) {
+                    console.error('Error with AI:', error);
+                    typingIndicator.style.display = 'none';
+                    
+                    // Fallback responses in case of API issues
+                    const fallbackResponses = [
+                        "Saglyk meseleleri üçin hökman lukmana ýüz tutuň.",
+                        "Bu barada anyk maglumat almak üçin lukman bilen maslahatlaşmagyňyz maslahat berilýär.",
+                        "Saglygyňyzy goraýyş üçin düzenli derňewden geçmek we sagdyn ýaşaýyş tarapyny tutmak möhümdir.",
+                        "Alamatlar dowam etse, iň ýakyn saglyk edarasyna ýüz tutuň."
+                    ];
+                    
+                    const randomResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+                    addMessage(randomResponse, 'ai');
+                }
+            }
+            
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+                messageDiv.textContent = text;
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
         });
         
         function goToSettings() {
